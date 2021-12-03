@@ -3,25 +3,23 @@ package solutions
 import readInput
 
 fun main() {
-    fun part1(input: List<Int>): Int {
-        var result = 0
+    fun count(input: List<Int>): Int {
+        var count = 0
 
         input.indices.forEach {
-            if (it != 0 && input[it] > input[it - 1]) result++
+            if (it != 0 && input[it] > input[it - 1]) count++
         }
+        return count
+    }
 
-        return result
+    fun part1(input: List<Int>): Int {
+        return count(input)
     }
 
     fun part2(input: List<Int>): Int {
-        var result = 0
-        val sum = input.windowed(3, 1).map { it.sum() }
+        val sum = input.windowed(3).map { it.sum() }
 
-        sum.indices.forEach {
-            if (it != 0 && sum[it] > sum[it - 1]) result++
-        }
-
-        return result
+        return count(sum)
     }
 
     val input = readInput("Day01").map { it.toInt() }
